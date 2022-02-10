@@ -27,7 +27,6 @@ class CreateJobsTable extends Migration
             $table->integer('job_bounty');
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('country_id')->unsigned();
-            $table->bigInteger('timezone_id')->unsigned();
             $table->bigInteger('state_id')->unsigned();
             $table->timestamps();
         });

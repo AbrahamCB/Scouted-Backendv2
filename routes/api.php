@@ -153,7 +153,7 @@ Route::group(
 );
 
 
-// contact
+// Contact
 
 Route::group(
     [
@@ -163,6 +163,21 @@ Route::group(
         Route::get('/contacts', [ContactController::class, 'index']);
         Route::post('/contact', [ContactController::class, 'store']);
         Route::post('/contact/{id}', [ContactController::class, 'destory']);
+    }
+);
+
+
+// Setup
+
+Route::group(
+    [
+        'prefix' => '/'
+    ],
+    function ($router) {
+        Route::get('/run/country', [SetupController::class, 'country']);
+        Route::get('/run/state', [SetupController::class, 'state']);
+        // Route::get('/run/country', [SetupController::class, 'country']);
+
     }
 );
 
