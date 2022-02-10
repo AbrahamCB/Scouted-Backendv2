@@ -28,11 +28,9 @@ class CreateCompaniesTable extends Migration
             $table->string('linkedin_url', 500)->nullable();
             $table->string('instagram_url', 500)->nullable();
             $table->bigInteger('country_id')->unsigned();
-            $table->bigInteger('timezone_id')->unsigned();
             $table->bigInteger('state_id')->unsigned();
             $table->boolean('status')->default(0);
             $table->timestamps();
-            $table->foreign('timezone_id')->references('id')->on('timezones')->onDelete('cascade');
         });
     }
 
