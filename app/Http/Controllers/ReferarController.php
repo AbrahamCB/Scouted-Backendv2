@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ReferMail;
 use App\Models\Job;
+use App\Mail\ReferMail;
 use App\Models\Referar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ReferarController extends Controller
 {   
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:user');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth:user');
+    }
 
     public function refer(Request $request, $id)
     {
@@ -60,6 +61,16 @@ class ReferarController extends Controller
                 'referer_id' => $refer->id
             ]);
         }
+    }
+
+
+    public function referJobs()
+    {
+        return Job::with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+            ->whereHas('referars', function ($query){
+                $query->where('referrer_email', Auth::user()->email);
+            })
+            ->get();
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,6 +94,7 @@ class UserController extends Controller
         return response()->json(['message' => 'User created successfully', 'user' => $user]);
 
     }
+
 
     public function profile(Request $request)
     {   

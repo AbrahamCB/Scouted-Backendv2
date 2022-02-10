@@ -17,7 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('company_name')->nullable();
             $table->string('company_slug');
-            $table->string('company_description')->nullable();
+            $table->string('company_description', 1000)->nullable();
             $table->string('company_logo')->nullable();
             $table->string('website_url')->nullable();
             $table->string('employee_number')->nullable();
@@ -29,6 +29,9 @@ class CreateCompaniesTable extends Migration
             $table->string('instagram_url', 500)->nullable();
             $table->bigInteger('country_id')->unsigned();
             $table->bigInteger('state_id')->unsigned();
+            $table->string('timezone');
+            $table->string('expire_date');
+            $table->string('working_hours');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
