@@ -20,8 +20,8 @@ class CreateCompaniesTable extends Migration
             $table->string('company_description', 1000)->nullable();
             $table->string('company_logo')->nullable();
             $table->string('website_url')->nullable();
-            $table->string('employee_number')->nullable();
             $table->string('crunchbase_url')->nullable();
+            $table->string('employee_number')->nullable();
             $table->string('founded_date')->nullable();
             $table->string('facebook_url', 500)->nullable();
             $table->string('twitter_url', 500)->nullable();
@@ -30,9 +30,7 @@ class CreateCompaniesTable extends Migration
             $table->bigInteger('country_id')->unsigned();
             $table->bigInteger('state_id')->unsigned();
             $table->string('timezone');
-            $table->string('expire_date');
-            $table->string('working_hours');
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

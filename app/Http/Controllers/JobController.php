@@ -95,13 +95,19 @@ class JobController extends Controller
                 'job_title' => 'required|string|between:2,30',
                 'job_description' => 'required|string|between:2,9999',
                 'job_salary' => 'required|string',
-                'job_condition' => 'boolean',
-                'job_vacancy' => 'required|numeric',
                 'job_bounty' => 'required|numeric',
+                'job_vacancy' => 'required|numeric',
+                'working_hours' => 'required|string',
+                'joining_date' => 'required|string',
+                'expiry_date' => 'required|string',
+                '_hourly' => 'required|boolean',
+                'hourly_rate' => 'string',
+                '_remote' => 'boolean',
+                'job_type' => 'required|string',
                 'company_id' => 'required|numeric',
                 'country_id' => 'required|numeric',
-                'timezone_id' => 'required|numeric',
-                'state_id' => 'required|numeric'
+                'state_id' => 'required|numeric',
+                '_timezone' => 'required|string',
             ]
         );
 

@@ -10,19 +10,22 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
-        'country_id',
-        'state_id',
         'company_name',
         'company_slug',
         'company_description',
         'company_logo',
         'website_url',
+        'crunchbase_url',
         'employee_number',
         'founded_date',
-        'timezone_id',
-        'crunchbase_url',
-        'status',
-        'social_id'
+        'facebook_url',
+        'twitter_url',
+        'linkedin_url',
+        'instagram_url',
+        'country_id',
+        'state_id',
+        'timezone',
+        'status'
     ];
 
     public function jobs(){

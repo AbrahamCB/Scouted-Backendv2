@@ -41,20 +41,22 @@ class CompanyController extends Controller
     {
         $validator = Validator::make(
             $request->all(),
-            [
+            [   
+                'company_name' => 'required|string|between:2,50',
+                'company_description' => 'required|string',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'website_url' => 'required|string',
+                'crunchbase_url' => 'string',
+                'employee_number' => 'required|numeric',
+                'founded_date' => 'required',
                 'facebook_url'  => 'required|string',
                 'twitter_url' => 'string',
                 'linkedin_url' => 'string',
                 'instagram_url' => 'string',
                 'country_id' => 'required|numeric',
                 'state_id' => 'required|numeric',
-                'company_name' => 'required|string|between:2,50',
-                'company_description' => 'required|string',
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'website_url' => 'required|string',
-                'employee_number' => 'required|numeric',
-                'founded_date' => 'required',
-                'timezone_id' => 'numeric',
+                'timezone' => 'string',
+                'status' => 'boolean',
             ]
         );
 

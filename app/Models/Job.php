@@ -14,17 +14,20 @@ class Job extends Model
         'job_slug',
         'job_description',
         'job_salary',
-        'job_condition',
-        'job_vacancy',
-        'job_referer',
-        'job_interviewer',
-        'hired',
         'job_bounty',
-        'job_salary',
+        '_status',
+        'job_vacancy',
+        'working_hours',
+        'joining_date',
+        'expiry_date',
+        '_hourly',
+        'hourly_rate',
+        '_remote',
+        'job_type',
         'company_id',
         'country_id',
-        'timezone_id',
         'state_id',
+        '_timezone'
     ];
 
     public function company()
