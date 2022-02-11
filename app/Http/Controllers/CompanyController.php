@@ -55,7 +55,7 @@ class CompanyController extends Controller
                 'instagram_url' => 'string',
                 'country_id' => 'required|numeric',
                 'state_id' => 'required|numeric',
-                'timezone' => 'string',
+                '_timezone' => 'string',
                 'status' => 'boolean',
             ]
         );

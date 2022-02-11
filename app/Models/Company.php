@@ -24,7 +24,7 @@ class Company extends Model
         'instagram_url',
         'country_id',
         'state_id',
-        'timezone',
+        '_timezone',
         'status'
     ];
 
