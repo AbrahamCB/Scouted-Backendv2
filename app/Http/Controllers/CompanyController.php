@@ -12,28 +12,28 @@ use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:admin', ['except' => ['index']]);
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth:admin', ['except' => ['index', 'find', 'findBySlug']]);
+    }
 
     public function index()
     {   
-        return Company::with(['country', 'state', 'timezone'])
+        return Company::with(['country', 'state'])
             ->get();
     }
 
     public function find($id)
     {   
         return Company::findOrFail($id)
-            ->with(['country', 'state', 'timezone'])
+            ->with(['country', 'state'])
                 ->first();
     }
 
     public function findBySlug($slug)
     {   
         return Company::where('company_slug', $slug)
-            ->with(['country', 'state', 'timezone'])
+            ->with(['country', 'state'])
                 ->get();
     }
 

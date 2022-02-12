@@ -23,7 +23,7 @@ class JobController extends Controller
     public function find($id)
     {
         return Job::where('id', $id)
-            ->with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+            ->with(['company', 'tags', 'referars', 'country', 'state'])
                 ->first();
     }
 
@@ -31,14 +31,14 @@ class JobController extends Controller
     public function search($search)
     {
         return Job::where('job_title','like','%'.$search.'%')
-            ->with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+            ->with(['company', 'tags', 'referars', 'country', 'state'])
                 ->get();
     }
 
     public function findBySlugAndCompany($company_slug, $job_slug)
     {
         return Job::where('job_slug', $job_slug)
-            ->with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+            ->with(['company', 'tags', 'referars', 'country', 'state'])
                 ->whereHas('company', function ($query) use ($company_slug) {
                     $query->where('company_slug', $company_slug);
                 })
@@ -47,7 +47,7 @@ class JobController extends Controller
 
     public function findByCompany($company_slug)
     {
-        return Job::with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+        return Job::with(['company', 'tags', 'referars', 'country', 'state'])
                 ->whereHas('company', function ($query) use ($company_slug) {
                     $query->where('company_slug', $company_slug);
                 })
@@ -56,7 +56,7 @@ class JobController extends Controller
 
     public function findByTag($tag_slug)
     {
-        return Job::with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+        return Job::with(['company', 'tags', 'referars', 'country', 'state'])
                 ->whereHas('tags', function ($query) use ($tag_slug) {
                     $query->where('tag_slug', $tag_slug);
                 })
@@ -65,7 +65,7 @@ class JobController extends Controller
 
     public function findByCountry($country_slug)
     {
-        return Job::with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+        return Job::with(['company', 'tags', 'referars', 'country', 'state'])
                 ->whereHas('country', function ($query) use ($country_slug) {
                     $query->where('country_slug', $country_slug);
                 })
@@ -74,7 +74,7 @@ class JobController extends Controller
 
     public function findByState($state)
     {
-        return Job::with(['company', 'tags', 'referars', 'country', 'state', 'timezone'])
+        return Job::with(['company', 'tags', 'referars', 'country', 'state'])
                 ->whereHas('state', function ($query) use ($state) {
                     $query->where('state_name','like','%'.$state.'%');
                 })
