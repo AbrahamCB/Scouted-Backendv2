@@ -44,8 +44,8 @@ class ReferarController extends Controller
             'candidate_email' => $request->candidate_email,
         ])->count()>0){
             return response()->json([
-                'success' => false,
-                'message' => 'Already reffered'
+                'success' => true,
+                'message' => 'Already reffered.'
             ], 201);
         }else{
             $refer = Referar::create(
@@ -60,6 +60,11 @@ class ReferarController extends Controller
                 'job_id' => $id,
                 'referer_id' => $refer->id
             ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Referred successfully'
+            ], 201);
         }
     }
 
