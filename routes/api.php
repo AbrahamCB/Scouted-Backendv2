@@ -55,7 +55,7 @@ Route::group([
     Route::get('/company/slug/{slug}', [CompanyController::class, 'findBySlug']);
     Route::get('/company/{id}', [CompanyController::class, 'find']);
     Route::post('/company', [CompanyController::class, 'store']);
-    Route::put('/company/{id}', [CompanyController::class, 'update']);
+    Route::post('/company/u/{id}', [CompanyController::class, 'update']);
     Route::delete('/company/{id}', [CompanyController::class, 'delete']);
 
 });
@@ -110,7 +110,7 @@ Route::group(
             [JobController::class, 'findByState']);
         Route::get('/job/{id}', [JobController::class, 'find']);
         Route::post('/job', [JobController::class, 'store']);
-        Route::put('/job/{id}', [JobController::class, 'update']);
+        Route::post('/job/u/{id}', [JobController::class, 'update']);
         Route::delete('/job/{id}', [JobController::class, 'destory']);
     }
 );

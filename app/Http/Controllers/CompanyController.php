@@ -48,7 +48,7 @@ class CompanyController extends Controller
                 'website_url' => 'required|string',
                 'crunchbase_url' => 'string',
                 'employee_number' => 'required|numeric',
-                'founded_date' => 'required',
+                'founded_date' => 'string',
                 'facebook_url'  => 'required|string',
                 'twitter_url' => 'string',
                 'linkedin_url' => 'string',
@@ -112,19 +112,21 @@ class CompanyController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'facebook_url'  => 'required|string',
+                'company_name' => 'string|between:2,50',
+                'company_description' => 'string',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'website_url' => 'string',
+                'crunchbase_url' => 'string',
+                'employee_number' => 'numeric',
+                'founded_date' => 'string',
+                'facebook_url'  => 'string',
                 'twitter_url' => 'string',
                 'linkedin_url' => 'string',
                 'instagram_url' => 'string',
-                'country_id' => 'required|numeric',
-                'state_id' => 'required|numeric',
-                'company_name' => 'required|string|between:2,50',
-                'company_description' => 'required|string',
-                'company_logo' => 'required',
-                'website_url' => 'required|string',
-                'employee_number' => 'required|string',
-                'founded_date' => 'required',
-                'timezone_id' => 'numeric',
+                'country_id' => 'numeric',
+                'state_id' => 'numeric',
+                '_timezone' => 'string',
+                'status' => 'boolean',
             ]
         );
 
@@ -135,6 +137,23 @@ class CompanyController extends Controller
             );
         }
 
+        if($request->hasFile('image')){
+
+        }else{
+            if (Company::findOrFail($id)->update(
+                array_merge(
+                    $validator->validated(),
+                    [
+                        'company_slug' => Str::slug( $request->company_name, '-'),
+                    ]
+                ))) 
+            {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Company updated successfully.'
+                ], 201);
+            }
+        }
     }
     
     public function destory($id)

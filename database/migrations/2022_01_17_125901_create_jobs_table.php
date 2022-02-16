@@ -18,7 +18,9 @@ class CreateJobsTable extends Migration
             $table->string('job_title');
             $table->string('job_slug');
             $table->string('job_description', 10000);
-            $table->string('job_salary');
+            $table->integer('min_salary');
+            $table->integer('max_salary');
+            $table->string('salary_currency');
             $table->integer('job_bounty');
             $table->boolean('_status')->default(1);
             $table->integer('job_vacancy');
@@ -32,7 +34,7 @@ class CreateJobsTable extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('country_id')->unsigned();
             $table->bigInteger('state_id')->unsigned();
-            $table->string('_timezone');
+            $table->string('_timezone')->nullable();
             $table->timestamps();
         });
     }

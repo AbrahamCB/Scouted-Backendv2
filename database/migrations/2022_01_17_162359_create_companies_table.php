@@ -29,7 +29,7 @@ class CreateCompaniesTable extends Migration
             $table->string('instagram_url', 500)->nullable();
             $table->bigInteger('country_id')->unsigned();
             $table->bigInteger('state_id')->unsigned();
-            $table->string('_timezone');
+            $table->string('_timezone')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

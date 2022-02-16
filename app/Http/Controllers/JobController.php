@@ -11,7 +11,7 @@ class JobController extends Controller
 {   
     public function __construct()
     {
-        $this->middleware('auth:admin', ['except' => ['index', 'find', 'search', 'findBySlugAndCompany', 'findByTag', 'findByCompany', 'findByCountry', 'findByState', 'show', 'store']]);
+        $this->middleware('auth:admin', ['except' => ['index', 'find', 'search', 'findBySlugAndCompany', 'findByTag', 'findByCompany', 'findByCountry', 'findByState', 'show']]);
 
     }
 
@@ -94,7 +94,9 @@ class JobController extends Controller
             [   
                 'job_title' => 'required|string|between:2,30',
                 'job_description' => 'required|string|between:2,9999',
-                'job_salary' => 'required|string',
+                'min_salary' => 'required|numeric',
+                'max_salary' => 'required|numeric',
+                'salary_currency' => 'required|string',
                 'job_bounty' => 'required|numeric',
                 'job_vacancy' => 'required|numeric',
                 'working_hours' => 'required|string',
@@ -107,7 +109,7 @@ class JobController extends Controller
                 'company_id' => 'required|numeric',
                 'country_id' => 'required|numeric',
                 'state_id' => 'required|numeric',
-                '_timezone' => 'required|string',
+                '_timezone' => 'string',
             ]
         );
 
@@ -139,10 +141,27 @@ class JobController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make(
+         $validator = Validator::make(
             $request->all(),
-            [
-                'tag_name' => 'required|string|between:2,30',
+            [   
+                'job_title' => 'string|between:2,30',
+                'job_description' => 'string|between:2,9999',
+                'min_salary' => 'numeric',
+                'max_salary' => 'numeric',
+                'salary_currency' => 'string',
+                'job_bounty' => 'numeric',
+                'job_vacancy' => 'numeric',
+                'working_hours' => 'string',
+                'joining_date' => 'string',
+                'expiry_date' => 'string',
+                '_hourly' => 'boolean',
+                'hourly_rate' => 'string',
+                '_remote' => 'boolean',
+                'job_type' => 'string',
+                'company_id' => 'numeric',
+                'country_id' => 'numeric',
+                'state_id' => 'numeric',
+                '_timezone' => 'string',
             ]
         );
 
@@ -153,19 +172,20 @@ class JobController extends Controller
             );
         }
 
-        $category = Tag::findOrFail($id)->update(
+        if (Job::findOrFail($id)->update(
             array_merge(
+                $validator->validated(),
                 [
-                    'tag_slug' => Str::slug($request->tag_name, '-')
-                ],
-                $validator->validated()
-            )
-        );
+                    'job_slug' => Str::slug($request->job_title, '-')
+                ]
+            ))) 
+        {   
+            
+            Job::findOrFail($id)->tags()->sync($request->tags);
 
-        if ($category) {
             return response()->json([
                 'success' => true,
-                'message' => 'Tag updated successfully.'
+                'message' => 'Job updated successfully.'
             ], 201);
         }
     }
@@ -178,9 +198,10 @@ class JobController extends Controller
        {
            $job->delete();
            return response()->json(
-                ['message'=>'Job deleted successfully.'],
-                422
-            );
+                [
+                    'success' => true,
+                    'message' => 'Job updated successfully.'
+                ], 422);
        } 
     }
 }
