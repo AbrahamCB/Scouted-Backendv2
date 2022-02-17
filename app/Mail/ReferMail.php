@@ -28,7 +28,8 @@ class ReferMail extends Mailable
      * @return $this
      */
     public function build()
-    {
-        return $this->subject('Test Mail From Surfside Media')->view('emails.TestMail');
+    {   
+        $html = '<h2 style="color: red ">Hey ismail hosen alif <h2>';
+        return $this->view('emails.TestMail', ['name'=> 'Ismail Hosen Alif']);
     }
 }

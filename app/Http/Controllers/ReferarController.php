@@ -62,7 +62,7 @@ class ReferarController extends Controller
             ]);
 
             return response()->json([
-                'success' => false,
+                'success' => true,
                 'message' => 'Referred successfully'
             ], 201);
         }
