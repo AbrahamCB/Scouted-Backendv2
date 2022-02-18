@@ -18,9 +18,17 @@ class CreateReferarsTable extends Migration
             $table->string('referrer_name');
             $table->string('referrer_email');
             $table->string('_referrerurl');
-            $table->string('candidate_name');
-            $table->string('candidate_email');
+            $table->boolean('_self')->default(0);
+            $table->string('candidate_name')->nullable();
+            $table->string('candidate_email')->nullable();
             $table->string('_candidateurl');
+            $table->string('referring_description');
+            $table->string('person_work');
+            $table->string('describe_them');
+            $table->string('opportunities');
+            $table->string('referring_company');
+            $table->string('payment_candidate');
+            $table->string('about_us');
             $table->bigInteger('job_id');
             $table->timestamps();
         });
@@ -43,3 +51,4 @@ class CreateReferarsTable extends Migration
         Schema::dropIfExists('job_referar');
     }
 }
+

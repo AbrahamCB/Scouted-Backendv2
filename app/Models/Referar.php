@@ -13,9 +13,16 @@ class Referar extends Model
         'referrer_name',
         'referrer_email',
         '_referrerurl',
+        '_self',
         'candidate_name',
         'candidate_email',
         '_candidateurl',
-        'job_id',
+        'referring_description',
+        'person_work',
+        'describe_them',
+        'opportunities',
+        'referring_company',
+        'payment_candidate',
+        'about_us'
     ];
 }

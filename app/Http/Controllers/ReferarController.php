@@ -25,12 +25,20 @@ class ReferarController extends Controller
         $validator = Validator::make(
             $request->all(),
             [   
-                'referrer_name' => 'required|string',
-                'referrer_email' => 'required|email',
-                '_referrerurl' => 'required|string',
-                'candidate_name' => 'required|string',
-                'candidate_email' => 'required|email',
-                '_candidateurl' => 'required|string',
+                'referrer_name'=> 'required|string',
+                'referrer_email'=> 'required|email',
+                '_referrerurl'=> 'required|string',
+                '_self'=> 'boolean',
+                'candidate_name'=> 'required|string',
+                'candidate_email'=> 'required|email',
+                '_candidateurl'=> 'required|string',
+                'referring_description'=> 'required|string',
+                'person_work'=> 'required|string',
+                'describe_them'=> 'required|string',
+                'opportunities'=> 'required|string',
+                'referring_company'=> 'required|string',
+                'payment_candidate'=> 'required|string',
+                'about_us'
             ]
         );
 
