@@ -41,15 +41,15 @@ class ReferarController extends Controller
             );
         }
 
-        // if(Referar::where([
-        //     'referrer_email' => $request->referrer_email,
-        //     'candidate_email' => $request->candidate_email,
-        // ])->count()>0){
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Already reffered.'
-        //     ], 201);
-        // }else{
+        if(Referar::where([
+            'referrer_email' => $request->referrer_email,
+            'candidate_email' => $request->candidate_email,
+        ])->count()>0){
+            return response()->json([
+                'success' => true,
+                'message' => 'Already reffered.'
+            ], 201);
+        }else{
             $refer = Referar::create(
                 array_merge(
                     [
@@ -81,7 +81,7 @@ class ReferarController extends Controller
                 'success' => true,
                 'message' => 'Refer successfully.'
             ], 201);
-        // }
+        }
     }
 
 
