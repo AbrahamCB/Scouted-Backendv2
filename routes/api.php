@@ -148,6 +148,7 @@ Route::group(
         Route::post('/refer/{id}', [ReferarController::class, 'refer']);
         Route::get('/refer/jobs', [ReferarController::class, 'referJobs']);
         Route::get('/check', [ReferarController::class, 'check']);
+        Route::get('/one', [ReferarController::class, 'one']);
         Route::put('/candidate/{id}', [CandidateController::class, 'update']);
         Route::delete('/candidate/{id}', [CandidateController::class, 'destory']);
     }

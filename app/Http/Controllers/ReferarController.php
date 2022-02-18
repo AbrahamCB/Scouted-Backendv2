@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReferalMail;
 use App\Models\Job;
 use App\Mail\ReferMail;
 use App\Models\Referar;
@@ -19,7 +20,8 @@ class ReferarController extends Controller
     }
 
     public function refer(Request $request, $id)
-    {
+    {   
+
         $validator = Validator::make(
             $request->all(),
             [   
@@ -39,15 +41,15 @@ class ReferarController extends Controller
             );
         }
 
-        if(Referar::where([
-            'referrer_email' => $request->referrer_email,
-            'candidate_email' => $request->candidate_email,
-        ])->count()>0){
-            return response()->json([
-                'success' => true,
-                'message' => 'Already reffered.'
-            ], 201);
-        }else{
+        // if(Referar::where([
+        //     'referrer_email' => $request->referrer_email,
+        //     'candidate_email' => $request->candidate_email,
+        // ])->count()>0){
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'Already reffered.'
+        //     ], 201);
+        // }else{
             $refer = Referar::create(
                 array_merge(
                     [
@@ -61,11 +63,25 @@ class ReferarController extends Controller
                 'referer_id' => $refer->id
             ]);
 
+            $job = Job::findOrFail($id)->with('company')->first();
+
+            Mail::to($request->referrer_email)
+                ->send(new ReferMail($request->referrer_name));
+            
+
+            Mail::to($request->candidate_email)
+                    ->send(new ReferalMail(
+                        $job->company->company_slug, 
+                        $job->job_slug,
+                        $job->job_title,
+                        $request->referrer_name
+                    ));
+
             return response()->json([
                 'success' => true,
-                'message' => 'Referred successfully'
+                'message' => 'Refer successfully.'
             ], 201);
-        }
+        // }
     }
 
 
@@ -79,15 +95,4 @@ class ReferarController extends Controller
     }
 
 
-    public function check()
-    {
-       $details = [
-           'title' => 'Lorem is the best policy!',
-           'body' => 'This is our body. How can i help you? can you tell me...'
-       ];
-
-       Mail::to("dev2kaziarif@gmail.com")->send(new ReferMail($details));
-
-       return "Send";
-    }
 }
