@@ -38,7 +38,7 @@ class ReferarController extends Controller
                 'opportunities'=> 'required|string',
                 'referring_company'=> 'required|string',
                 'payment_candidate'=> 'required|string',
-                'about_us'
+                'about_us'=> 'required|string',
             ]
         );
 
@@ -104,3 +104,4 @@ class ReferarController extends Controller
 
 
 }
+

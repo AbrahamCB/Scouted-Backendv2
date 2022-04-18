@@ -23,6 +23,7 @@ class Referar extends Model
         'opportunities',
         'referring_company',
         'payment_candidate',
-        'about_us'
+        'about_us',
+        'job_id'
     ];
 }
